@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
+import emailjs from 'emailjs-com';  // Import EmailJS
 import ContactImage from "../assets/images/contact.svg";
 
 const Contact = () => {
@@ -38,14 +39,20 @@ const Contact = () => {
 
         if (!validateForm()) return;
 
-        // Simulate form submission success
-        console.log('Form submitted successfully with data:', formData);
-        alert('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
+        // Use EmailJS to send the form data as an email
+        emailjs.sendForm('service_ijsugv2', 'template_jcw3dxg', e.target, 'dxlIerXfEdTyPTsYl')
+            .then((result) => {
+                console.log('Message sent:', result.text);
+                alert('Message sent successfully!');
+                setFormData({ name: '', email: '', message: '' });
+            }, (error) => {
+                console.log('Error:', error.text);
+                alert('Failed to send message. Please try again.');
+            });
     };
 
     return (
-        <div id='contact' className="bg-gray-800 text-white py-10 px-5 sm:px-20 md:px-32">
+        <div id='contact' className="bg-black text-white py-10 w-full px-5 sm:px-20 md:px-32">
             <h2 className="text-3xl font-bold mb-8 text-center">Let's Connect</h2>
             <div className="flex items-center justify-between">
                 <div className="hidden md:block w-1/2 pl-8">
@@ -68,7 +75,7 @@ const Contact = () => {
                                     placeholder="Enter your name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="bg-gray-800 text-white w-full outline-none"
+                                    className="bg-transparent text-white w-full outline-none"
                                 />
                             </div>
                             {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
@@ -84,7 +91,7 @@ const Contact = () => {
                                     placeholder="Enter your email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="bg-gray-800 text-white w-full outline-none"
+                                    className="bg-transparent text-white w-full outline-none"
                                 />
                             </div>
                             {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
@@ -100,7 +107,7 @@ const Contact = () => {
                                     rows="4"
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="bg-gray-800 text-white w-full outline-none resize-none"
+                                    className="bg-transparent text-white w-full outline-none resize-none"
                                 />
                             </div>
                             {formErrors.message && <p className="text-red-500 text-sm">{formErrors.message}</p>}

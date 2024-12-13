@@ -11,28 +11,38 @@ const Navbar = () => {
 
     return (
         <div className='flex justify-between items-center px-5 py-3 shadow-md'>
-            {/* Logo */}
-            <img
-                className='rounded-full w-16 md:w-20'
-                src={MyLogo}
-                alt="My Logo"
-                aria-label="Shakeel Ahmed Logo"
-            />
+            {/* Logo and Name */}
+            <a href="#home" className='flex items-center gap-3'>
+                <img
+                    className='rounded-full w-14 md:w-16 border-2 border-blue-600'
+                    src={MyLogo}
+                    alt="Shakeel Ahmed Logo"
+                    aria-label="Shakeel Ahmed Logo"
+                />
+                <span className='font-poppins text-lg md:text-xl font-semibold '>Shakeel Ahmed</span>
+            </a>
 
             {/* Desktop Navigation Menu */}
             <nav>
-                <ul className='hidden md:flex gap-8 font-poppins text-lg '>
-                    <li className='hover:text-blue-600 hover:underline cursor-pointer'>Home</li>
-                    <li className='hover:text-blue-600 hover:underline cursor-pointer'>Projects</li>
-                    <li className='hover:text-blue-600 hover:underline cursor-pointer'>Services</li>
-                    <li className='hover:text-blue-600 hover:underline cursor-pointer'>Portfolio</li>
-                    <li className='hover:text-blue-600 hover:underline cursor-pointer'>Contact</li>
+                <ul className='hidden md:flex gap-6 font-poppins text-base'>
+                    <li>
+                        <a href="#home" className='hover:text-blue-600 hover:underline cursor-pointer text-xl font-bold'>Home</a>
+                    </li>
+                    <li>
+                        <a href="#projects" className='hover:text-blue-600 hover:underline cursor-pointer text-xl font-bold'>Projects</a>
+                    </li>
+                    <li>
+                        <a href="#services" className='hover:text-blue-600 hover:underline cursor-pointer text-xl font-bold'>Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact" className='hover:text-blue-600 hover:underline cursor-pointer text-xl font-bold'>Contact</a>
+                    </li>
                 </ul>
             </nav>
 
             {/* Mobile Menu (Hamburger Icon) */}
             <div className='md:hidden'>
-                <button className='text-2xl focus:outline-none' onClick={toggleMenu} aria-label="Toggle Navigation Menu" > ☰ </button>
+                <button className='text-2xl focus:outline-none' onClick={toggleMenu} aria-label="Toggle Navigation Menu"> ☰ </button>
             </div>
 
             {/* Full-Screen Mobile Navigation Menu */}
@@ -47,36 +57,18 @@ const Navbar = () => {
                         ✖
                     </button>
 
-                    <ul className='flex flex-col gap-8 font-poppins text-2xl font-bold text-center'>
-                        <li
-                            className='hover:text-gray-400 cursor-pointer'
-                            onClick={toggleMenu} // Close menu on click
-                        >
-                            Home
+                    <ul className='flex flex-col gap-6 font-poppins text-xl  text-center'>
+                        <li>
+                            <a href="#home" className='hover:text-gray-400 cursor-pointer' onClick={toggleMenu}>Home</a>
                         </li>
-                        <li
-                            className='hover:text-gray-400 cursor-pointer'
-                            onClick={toggleMenu}
-                        >
-                            Projects
+                        <li>
+                            <a href="#projects" className='hover:text-gray-400 cursor-pointer' onClick={toggleMenu}>Projects</a>
                         </li>
-                        <li
-                            className='hover:text-gray-400 cursor-pointer'
-                            onClick={toggleMenu}
-                        >
-                            Services
+                        <li>
+                            <a href="#services" className='hover:text-gray-400 cursor-pointer' onClick={toggleMenu}>Services</a>
                         </li>
-                        <li
-                            className='hover:text-gray-400 cursor-pointer'
-                            onClick={toggleMenu}
-                        >
-                            Portfolio
-                        </li>
-                        <li
-                            className='hover:text-gray-400 cursor-pointer'
-                            onClick={toggleMenu}
-                        >
-                            Contact
+                        <li>
+                            <a href="#contact" className='hover:text-gray-400 cursor-pointer' onClick={toggleMenu}>Contact</a>
                         </li>
                     </ul>
                 </div>

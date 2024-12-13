@@ -5,6 +5,15 @@ import { TiSocialFacebookCircular } from "react-icons/ti";
 import { SlSocialInstagram } from "react-icons/sl";
 import { FaTwitter } from "react-icons/fa";
 import { ImGithub } from "react-icons/im";
+import { FaReact } from 'react-icons/fa';
+import { SiTailwindcss } from 'react-icons/si';
+import { SiJavascript } from 'react-icons/si';
+import { SiHtml5 } from 'react-icons/si';
+import { SiCss3 } from 'react-icons/si';
+import { FaFigma } from 'react-icons/fa';
+import { SiSass } from 'react-icons/si';
+import { SiBootstrap } from 'react-icons/si';
+import { FaGit } from 'react-icons/fa';
 
 const Hero = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,7 +67,7 @@ const Hero = () => {
                         <div className="flex-1">
                             <button 
                                 onClick={() => setIsModalOpen(false)} 
-                                className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-xl"
+                                className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-4xl"
                             >
                                 &times;
                             </button>
@@ -66,29 +75,35 @@ const Hero = () => {
                             <p className="text-gray-300 mb-6">
                                 I am a passionate Front-End Developer specialized in creating responsive and user-friendly web interfaces. My core skills include:
                             </p>
+                            <div className='flex justify-center items-center'>
                             <ul className="list-disc list-inside text-gray-400 mb-4">
-                                <li>React.js</li>
-                                <li>Tailwind CSS</li>
-                                <li>JavaScript</li>
-                                <li>HTML & CSS</li>
-                                <li>Figma</li>
-                                <li>SASS</li>
-                                <li>Bootstrap</li>
-                                <li>Git & GitHub</li>
+                                <li className="flex items-center gap-2 text-blue-600 text-2xl"><FaReact /> React.js</li>
+                                <li className="flex items-center gap-2 text-blue-400 text-2xl"><SiTailwindcss /> Tailwind CSS</li>
+                                <li className="flex items-center gap-2 text-yellow-400 text-2xl"><SiJavascript /> JavaScript</li>
+                                <li className="flex items-center gap-2 text-orange-500 text-2xl"><SiHtml5 /> HTML5</li>
+                                <li className="flex items-center gap-2 text-blue-500 text-2xl"><SiCss3 /> CSS3</li>
+                                <li className="flex items-center gap-2 text-purple-600 text-2xl"><FaFigma /> Figma</li>
+                                <li className="flex items-center gap-2 text-pink-400 text-2xl"><SiSass /> SASS</li>
+                                <li className="flex items-center gap-2 text-indigo-600 text-2xl"><SiBootstrap /> Bootstrap</li>
+                                <li className="flex items-center gap-2 text-gray-600 text-2xl"><FaGit /> Git & GitHub</li>
                             </ul>
+
+                            {/* Right - Image */}
+                        <div className="flex-1 flex justify-center items-center">
+                            <img 
+                                className=" hidden sm:block w-60 h-60 rounded-full border-4 border-gray-200 shadow-lg" 
+                                src={MyLogo} 
+                                alt="Shakeel Ahmed" 
+                            />
+                        </div>
+                        </div>
+
                             <p className="text-gray-300">
                                 <strong>Education:</strong> Self-learning through YouTube and online resources.
                             </p>
                         </div>
 
-                        {/* Right - Image */}
-                        <div className="flex-1 flex justify-center items-center">
-                            <img 
-                                className="w-60 h-60 rounded-full border-4 border-gray-200 shadow-lg" 
-                                src={MyLogo} 
-                                alt="Shakeel Ahmed" 
-                            />
-                        </div>
+                        
                     </div>
                 </div>
             )}

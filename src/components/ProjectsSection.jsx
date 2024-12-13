@@ -41,7 +41,7 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <div className="bg-[#121212] text-white py-10 px-5 sm:px-20 md:px-32">
+    <div id="projects" className="bg-[#121212] text-white py-10 px-5 sm:px-20 md:px-32">
       <h2 className="text-3xl font-bold mb-8 text-center">My Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
