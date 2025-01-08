@@ -1,84 +1,68 @@
 import React from "react";
-import EmployeMangement from "../assets/images/employee.jpg";
-import ArmyImage from "../assets/images/army.jpg";
-import EcomereceImage from "../assets/images/ecomerce.jpg";
-import TravelImage from "../assets/images/travel.jpg";
+import projectImage1 from "../assets/images/ecomerce.png";
+import projectImage2 from "../assets/images/digitalassests.png";
+import projectImage3 from "../assets/images/miltaryacademy.png";
+import projectImage4 from "../assets/images/travel.png";
+import projectImage5 from "../assets/images/employeemanagment.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
 
 const projects = [
-  {
-    title: "Employee Management System",
-    description:
-      "A web-based application to manage employee records and operations efficiently, developed using React.js.",
-    image: EmployeMangement,
-    link: "https://employee-management-system-in-react-js.vercel.app/",
-    technologies: ["React.js", "Tailwind.CSS"],
-  },
-  {
-    title: "Military Academy Website",
-    description:
-      "A professional website designed for a military academy, focusing on modern UI and user experience.",
-    image: ArmyImage,
-    link: "https://miltary-academy-website.vercel.app/",
-    technologies: ["React.js", "Tailwind.CSS"],
-  },
-  {
-    title: "Digital Assets E-commerce Website",
-    description:
-      "An e-commerce platform showcasing digital assets with features like product listing and responsive design.",
-    image: EcomereceImage,
-    link: "https://digital-assets-ecomerece-website-2tba.vercel.app/",
-    technologies: ["React.js", "Tailwind.CSS"],
-  },
-  {
-    title: "Travel Agency Website",
-    description:
-      "A modern and sleek website designed for a travel agency, highlighting their services and destinations.",
-    image: TravelImage,
-    link: "https://travel-agency-website-rose.vercel.app/",
-    technologies: ["React.js", "Tailwind.CSS"],
-  },
+  { image: projectImage1, link: "https://ecomerece-website.vercel.app/" },
+  { image: projectImage2, link: "https://digital-assets-ecomerece-website-2tba.vercel.app/" },
+  { image: projectImage3, link: "https://miltary-academy-website.vercel.app/" },
+  { image: projectImage4, link: "https://travel-agency-website-rose.vercel.app/" },
+  { image: projectImage5, link: "https://employee-management-system-in-react-js.vercel.app/" },
 ];
 
 const ProjectsSection = () => {
   return (
-    <div id="projects" className="bg-[#121212] text-white py-10 px-5 sm:px-20 md:px-32">
-      <h2 className="text-3xl font-bold mb-8 text-center">My Projects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div
+      id="projects"
+      className="bg-[#121212] py-12 px-5 sm:px-20 md:px-28"
+      style={{ minHeight: "100vh" }}
+    >
+      <h2 className="text-4xl font-bold mb-12 text-center tracking-wide text-white">
+        Explore Our Works
+      </h2>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 2 },
+        }}
+        className="w-full"
+      >
         {projects.map((project, index) => (
-          <div
-            key={index}
-            className="bg-gray-800 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-          >
-            <img 
-              src={project.image}
-              alt={project.title}
-              className="w-full h-52 object-cover rounded-xl p-2 "
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-gray-300 mb-3">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                {project.technologies.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-full"
-                  >
-                    #{tech}
-                  </span>
-                ))}
-              </div>
+          <SwiperSlide key={index}>
+            <div className="h-[100vh] rounded-md overflow-y-auto overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+              <img
+                src={project.image}
+                alt={`Project ${index + 1}`}
+                className="w-full object-cover"
+              />
+            </div>
+            <div className="text-center mt-8 cursor-pointer">
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition"
+                className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-colors duration-300"
               >
                 View Project
               </a>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
