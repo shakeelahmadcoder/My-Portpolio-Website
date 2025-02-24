@@ -7,8 +7,8 @@ import projectImage5 from "../assets/images/employeemanagment.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
+import { motion } from "framer-motion"; // Framer Motion import
 
 const projects = [
   { image: projectImage1, link: "https://ecomerece-website.vercel.app/" },
@@ -20,18 +20,20 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <div
+    <motion.div
       id="projects"
       className="bg-[#121212] py-12 px-5 sm:px-20 md:px-28"
       style={{ minHeight: "100vh" }}
+      initial={{ opacity: 0, y: 50 }} // Initial state (hidden)
+      whileInView={{ opacity: 1, y: 0 }} // Animate when in view
+      transition={{ duration: 0.8 }} // Animation duration
     >
       <h2 className="text-4xl font-bold mb-12 text-center tracking-wide text-white">
-        Explore Our Works
+        My Creative Projects
       </h2>
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation]}
         navigation
-        pagination={{ clickable: true }}
         spaceBetween={20}
         slidesPerView={1}
         breakpoints={{
@@ -42,15 +44,25 @@ const ProjectsSection = () => {
         className="w-full"
       >
         {projects.map((project, index) => (
-          <SwiperSlide key={index}>
-            <div className="h-[100vh] rounded-md overflow-y-auto overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+          <SwiperSlide key={index} className="flex flex-col items-center">
+            <motion.div
+              className="h-[75vh] rounded-md overflow-y-auto overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+              initial={{ opacity: 0, scale: 0.9 }} // Initial state (hidden)
+              whileInView={{ opacity: 1, scale: 1 }} // Animate when in view
+              transition={{ duration: 0.8, delay: index * 0.2 }} // Animation duration with delay
+            >
               <img
                 src={project.image}
                 alt={`Project ${index + 1}`}
                 className="w-full object-cover"
               />
-            </div>
-            <div className="text-center mt-8 cursor-pointer">
+            </motion.div>
+            <motion.div
+              className="text-center mt-4"
+              initial={{ opacity: 0, y: 20 }} // Initial state (hidden)
+              whileInView={{ opacity: 1, y: 0 }} // Animate when in view
+              transition={{ duration: 0.8, delay: index * 0.2 }} // Animation duration with delay
+            >
               <a
                 href={project.link}
                 target="_blank"
@@ -59,11 +71,11 @@ const ProjectsSection = () => {
               >
                 View Project
               </a>
-            </div>
+            </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

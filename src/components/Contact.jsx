@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaUserAlt, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 import emailjs from 'emailjs-com';  // Import EmailJS
+import { motion } from 'framer-motion';
 import ContactImage from "../assets/images/contact.svg";
 
 const Contact = () => {
@@ -39,91 +40,76 @@ const Contact = () => {
 
         if (!validateForm()) return;
 
-        // Use EmailJS to send the form data as an email
         emailjs.sendForm('service_ijsugv2', 'template_jcw3dxg', e.target, 'dxlIerXfEdTyPTsYl')
             .then((result) => {
-                console.log('Message sent:', result.text);
                 alert('Message sent successfully!');
                 setFormData({ name: '', email: '', message: '' });
             }, (error) => {
-                console.log('Error:', error.text);
                 alert('Failed to send message. Please try again.');
             });
     };
 
     return (
-        <div id='contact' className="bg-black text-white py-10 w-full px-5 sm:px-20 md:px-32">
+        <motion.div 
+            id='contact' 
+            className="bg-black text-white py-10 w-full px-5 sm:px-20 md:px-32"
+            initial={{ opacity: 0, y: -50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+        >
             <h2 className="text-3xl font-bold mb-8 text-center">Let's Connect</h2>
             <div className="flex items-center justify-between">
-                <div className="hidden md:block w-1/2 pl-8">
-                    <img
-                        src={ContactImage}
-                        alt="Contact Illustration"
-                        className="w-full h-auto rounded-lg"
-                    />
-                </div>
-                <div className="w-full md:w-1/2">
+                <motion.div 
+                    className="hidden md:block w-1/2 pl-8"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                >
+                    <img src={ContactImage} alt="Contact Illustration" className="w-full h-auto rounded-lg" />
+                </motion.div>
+                <motion.div 
+                    className="w-full md:w-1/2"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                >
                     <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-lg mb-2">Name</label>
-                            <div className="flex items-center border border-gray-500 p-2 rounded-lg">
-                                <FaUserAlt className="text-blue-500 mr-2" />
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    placeholder="Enter your name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="bg-transparent text-white w-full outline-none"
-                                />
-                            </div>
-                            {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-lg mb-2">Email</label>
-                            <div className="flex items-center border border-gray-500 p-2 rounded-lg">
-                                <FaEnvelope className="text-blue-500 mr-2" />
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Enter your email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="bg-transparent text-white w-full outline-none"
-                                />
-                            </div>
-                            {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="message" className="block text-lg mb-2">Message</label>
-                            <div className="flex items-start border border-gray-500 p-2 rounded-lg">
-                                <FaPaperPlane className="text-blue-500 mr-2" />
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    placeholder="Enter your message"
-                                    rows="4"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="bg-transparent text-white w-full outline-none resize-none"
-                                />
-                            </div>
-                            {formErrors.message && <p className="text-red-500 text-sm">{formErrors.message}</p>}
-                        </div>
-                        <button
+                        {[{ label: 'Name', icon: <FaUserAlt />, id: 'name' },
+                          { label: 'Email', icon: <FaEnvelope />, id: 'email' },
+                          { label: 'Message', icon: <FaPaperPlane />, id: 'message' }]
+                          .map(({ label, icon, id }) => (
+                            <motion.div 
+                                key={id} 
+                                className="mb-4"
+                                initial={{ opacity: 0, x: -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                            >
+                                <label htmlFor={id} className="block text-lg mb-2">{label}</label>
+                                <div className="flex items-center border border-gray-500 p-2 rounded-lg">
+                                    {icon}
+                                    {id === 'message' ? (
+                                        <textarea id={id} name={id} placeholder={`Enter your ${label.toLowerCase()}`} rows="4" value={formData[id]} onChange={handleChange} className="bg-transparent text-white w-full outline-none resize-none"/>
+                                    ) : (
+                                        <input type={id === 'email' ? 'email' : 'text'} id={id} name={id} placeholder={`Enter your ${label.toLowerCase()}`} value={formData[id]} onChange={handleChange} className="bg-transparent text-white w-full outline-none"/>
+                                    )}
+                                </div>
+                                {formErrors[id] && <p className="text-red-500 text-sm">{formErrors[id]}</p>}
+                            </motion.div>
+                        ))}
+                        <motion.button
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg flex items-center w-full justify-center text-center"
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
                         >
                             <FaPaperPlane className="mr-2" />
                             Send Message
-                        </button>
+                        </motion.button>
                     </form>
-                </div>
-
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
